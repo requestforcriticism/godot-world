@@ -5,6 +5,7 @@ signal hit
 @export var speed = 400
 var screen_size
 
+var health = 3
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -34,11 +35,15 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	hide()
-	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
+	health -= 1
+	hit.emit(health)
 	
-func start(pos):
+	if(health <= 0):
+		hide()
+		$CollisionShape2D.set_deferred("disabled", true)
+	
+func start(pos, hp):
 	position = pos
+	health = hp
 	show()
 	$CollisionShape2D.disabled = false

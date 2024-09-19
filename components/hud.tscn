@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://rdhq361ruwcp"]
+[gd_scene load_steps=6 format=3 uid="uid://rdhq361ruwcp"]
 
 [ext_resource type="FontFile" uid="uid://c4gmximk6tme5" path="res://fonts/Xolonium-Regular.ttf" id="1_4lfgr"]
 [ext_resource type="Script" path="res://components/hud.gd" id="1_18sgu"]
+[ext_resource type="Script" path="res://components/health_label.gd" id="3_fy5uk"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_a6kdq"]
 action = &"start_game"
@@ -67,6 +68,16 @@ text = "Start"
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = 61.0
+offset_top = 21.0
+offset_right = 136.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("1_4lfgr")
+theme_override_font_sizes/font_size = 26
+text = "HP: 3"
+script = ExtResource("3_fy5uk")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

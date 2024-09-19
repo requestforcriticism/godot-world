@@ -28,6 +28,7 @@ script = ExtResource("1_cku4f")
 mob_scene = ExtResource("2_hfk0n")
 sploder_scene = ExtResource("3_ocid5")
 splosion_scene = ExtResource("4_tvppp")
+start_health = 5
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

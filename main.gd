@@ -4,6 +4,8 @@ extends Node
 @export var sploder_scene: PackedScene
 @export var splosion_scene: PackedScene
 
+@export var start_health : int
+
 var score
 
 # Called when the node enters the scene tree for the first time.
@@ -15,16 +17,19 @@ func _ready():
 func _process(delta):
 	pass
 
-func game_over():
-	$ScoreTimer.stop()
-	$MobTimer.stop()
-	$HUD.show_game_over()
-	$Music.stop()
-	$DeathSound.play()
+func game_over(health):
+	$HUD.set_hp(health)
+	if health <= 0:
+		$ScoreTimer.stop()
+		$MobTimer.stop()
+		$HUD.show_game_over()
+		$Music.stop()
+		$DeathSound.play()
 	
 func new_game():
 	score = 0
-	$Player.start($StartPosition.position)
+	$HUD.set_hp(start_health)
+	$Player.start($StartPosition.position, start_health)
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
@@ -33,8 +38,8 @@ func new_game():
 
 func _on_mob_timer_timeout():
 	var mob
-	var d10 = randi_range(1, 10)
-	if d10 <= 2:
+	var d10 = randi_range(6, 10)
+	if d10 <= 4:
 		return
 	elif d10 <= 8:
 		mob = mob_scene.instantiate()
@@ -67,12 +72,13 @@ func _on_start_timer_timeout():
 	
 func splode(pos):
 	
-	var splosion_angle = (2 * PI) / 6
+	var num_balls = randi_range(4, 6)
+	var splosion_angle = (2 * PI) / num_balls
+	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	
-	for i in range(6):
+	for i in range(num_balls):
 		var splosion = splosion_scene.instantiate()
 		splosion.position = pos
-		var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 		var direction = (i * splosion_angle)
 		splosion.linear_velocity = velocity.rotated(direction)
 		add_child(splosion)

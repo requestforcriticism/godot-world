@@ -35,3 +35,6 @@ func _on_start_button_pressed():
 
 func _on_message_timer_timeout():
 	$Message.hide()
+
+func set_hp(hp):
+	$HealthLabel.set_hp(hp)
