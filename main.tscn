@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://bf541dv4nlg1m"]
+[gd_scene load_steps=11 format=4 uid="uid://bf541dv4nlg1m"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_cku4f"]
 [ext_resource type="PackedScene" uid="uid://c8rc8lsgg13hx" path="res://components/player.tscn" id="2_fiun0"]
 [ext_resource type="PackedScene" uid="uid://b15w2oiqbo4qa" path="res://components/mob.tscn" id="2_hfk0n"]
+[ext_resource type="PackedScene" uid="uid://cbxx1iqwxbb5k" path="res://components/sploder.tscn" id="3_ocid5"]
+[ext_resource type="PackedScene" uid="uid://cdm2w6dirnro5" path="res://components/splosion.tscn" id="4_tvppp"]
 [ext_resource type="PackedScene" uid="uid://rdhq361ruwcp" path="res://components/hud.tscn" id="4_v2ka0"]
 [ext_resource type="AudioStream" uid="uid://yncpd6ikvmx7" path="res://art/gameover.wav" id="5_85cyi"]
 
@@ -24,6 +26,8 @@ loop = true
 [node name="Main" type="Node"]
 script = ExtResource("1_cku4f")
 mob_scene = ExtResource("2_hfk0n")
+sploder_scene = ExtResource("3_ocid5")
+splosion_scene = ExtResource("4_tvppp")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

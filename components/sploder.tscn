@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbxx1iqwxbb5k"]
+
+[ext_resource type="Script" path="res://components/sploder.gd" id="1_mockd"]
+[ext_resource type="Texture2D" uid="uid://b48wo7pttsg38" path="res://art/enemy_boom_1.png" id="2_x3mbe"]
+[ext_resource type="Texture2D" uid="uid://w0dsa7l82oqg" path="res://art/enemy_boom_2.png" id="3_obsc5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jpyig"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x3mbe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_obsc5")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dd4ep"]
+radius = 37.0
+height = 74.0
+
+[node name="sploder" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_mockd")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jpyig")
+animation = &"fly"
+frame = 1
+frame_progress = 0.0217579
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dd4ep")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="FreezeTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="SplodeTimer" type="Timer" parent="." groups=["mobs"]]
+one_shot = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="FreezeTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SplodeTimer" to="." method="_splode"]

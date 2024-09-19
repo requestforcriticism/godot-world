@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdm2w6dirnro5"]
+
+[ext_resource type="Script" path="res://components/splosion.gd" id="1_0r3a3"]
+[ext_resource type="Texture2D" uid="uid://c8dlkk2ct2c7o" path="res://art/splosion_1.png" id="2_tq67e"]
+[ext_resource type="Texture2D" uid="uid://u40d3abgufev" path="res://art/splosion_2.png" id="3_vbtwr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qbhvj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tq67e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vbtwr")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_usmpj"]
+radius = 25.0
+height = 50.0
+
+[node name="splosion" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_0r3a3")
+metadata/_edit_group_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qbhvj")
+animation = &"blink"
+frame = 1
+frame_progress = 0.203973
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_usmpj")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
