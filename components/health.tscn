@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce1m4gatio1b0"]
+
+[ext_resource type="Script" path="res://components/health.gd" id="1_m8rbf"]
+[ext_resource type="Texture2D" uid="uid://sgrkmr3yxft" path="res://art/heart.png" id="1_qiq27"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbvh5"]
+size = Vector2(32, 32)
+
+[node name="Health" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_m8rbf")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qiq27")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rbvh5")
